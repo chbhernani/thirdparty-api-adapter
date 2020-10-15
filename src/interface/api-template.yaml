@@ -63,7 +63,6 @@ paths:
       operationId: MetricsGet
       summary: Prometheus metrics endpoint
       description: The HTTP request GET /metrics is used to return metrics for the API.
-  #thirdpartyRequests
   /thirdpartyRequests/transactions:
     post:
       tags:
@@ -233,6 +232,55 @@ paths:
               consentId: '8d34f91d-d078-4077-8263-2c0498dhbjr'
               sourceAccountId: 'dfspa.alice.1234'
               status: 'VERIFIED'
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /thirdpartyRequests/transactions/{ID}/error:
+    put:
+      description: If DFSP looks up the transaction request based on it's transactionRequestId and it can't be found, it calls PUT /thirdpartyRequests/transactions/{id}/error to the Switch, with a relevant error message
+      summary: Return thirdpartyRequests transactions information error
+      tags:
+        - thirdparty
+        - sampled
+      operationId: ThirdpartyRequestsTransactionsErrorByID
+      parameters:
+        #Path
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Date.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Source.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Destination.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Encryption.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Signature.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-URI.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-HTTP-Method.yaml'
+      requestBody:
+        description: Details of the error returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/ErrorInformationObject.yaml'
       responses:
         200:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
